@@ -369,9 +369,17 @@
    PULSO (somente no botão WhatsApp - classe .pulse)
 ========================= */
             @keyframes pulseBtn {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.06); }
-                100% { transform: scale(1); }
+                0% {
+                    transform: scale(1);
+                }
+
+                50% {
+                    transform: scale(1.06);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
             }
 
             /* IMPORTANTE:
@@ -448,14 +456,22 @@
                     <span>Atendimento direto</span>
                 </a>
 
+                <!-- WhatsApp secundário (SEM PULSO) -->
+                <a class="btn secondary"
+                    href="https://wa.me/5511993652030?text=Vim%20pelo%20instragam%20da%20Gioavana%20e%20queria%20saber%20mais%20sobre%20a%20TG%21"
+                    target="_blank" rel="noopener noreferrer">
+                    WhatsApp 2 (Alternativo)
+                    <span>Atendimento direto</span>
+                </a>
+
                 <!-- Avaliações -->
-                <a class="btn secondary" href="https://clientes.wolfpharma.me/" target="_blank">
+                <a class="btn" href="https://clientes.wolfpharma.me/" target="_blank">
                     Avaliações & Unboxing
                     <span>Clientes reais</span>
                 </a>
 
                 <!-- Comunidade -->
-                <a class="btn" href="https://chat.whatsapp.com/EcLb6vpAdC8JbvyEDPKC98" target="_blank">
+                <a class="btn secondary" href="https://chat.whatsapp.com/EcLb6vpAdC8JbvyEDPKC98" target="_blank">
                     Comunidade WhatsApp
                     <span>Estoques e preços</span>
                 </a>
