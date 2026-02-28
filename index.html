@@ -448,18 +448,12 @@
 
             <section class="links">
 
-                <!-- WhatsApp (PULSANDO) -->
-                <a class="btn pulse"
-                    href="https://wa.me/5511989243359?text=Vim%20pelo%20instragam%20da%20Giovana%20e%20queria%20saber%20mais%20sobre%20a%20TG%21"
-                    target="_blank">
+                <a class="btn pulse" id="wpp1" href="#" target="_blank">
                     WhatsApp
                     <span>Atendimento direto</span>
                 </a>
 
-                <!-- WhatsApp secundário (SEM PULSO) -->
-                <a class="btn secondary"
-                    href="https://wa.me/5511993652030?text=Vim%20pelo%20instragam%20da%20Giovana%20e%20queria%20saber%20mais%20sobre%20a%20TG%21"
-                    target="_blank" rel="noopener noreferrer">
+                <a class="btn secondary" id="wpp2" href="#" target="_blank" rel="noopener noreferrer">
                     WhatsApp 2 (Alternativo)
                     <span>Atendimento direto</span>
                 </a>
@@ -498,6 +492,49 @@
 
     <script>
         window.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const idRaw = (params.get("id") || "").trim();
+            const msgRaw = (params.get("msg") || "").trim(); // opcional
+
+            const mensagemPadrao = "Vim pelo site Links Wolf Pharma e queria saber mais sobre os produtos!";
+
+            // Normaliza o id para virar "nome bonito"
+            function toTitleCase(s) {
+                return s
+                    .replace(/[-_]+/g, " ")  
+                    .replace(/\s+/g, " ")     
+                    .trim()
+                    .split(" ")
+                    .filter(Boolean)
+                    .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+                    .join(" ");
+            }
+
+            // Mensagem final
+            let mensagemFinal = mensagemPadrao;
+
+            // Se vier ?msg= usa ela (prioridade máxima)
+            if (msgRaw) {
+                mensagemFinal = msgRaw;
+            } else if (idRaw) {
+                const nome = toTitleCase(idRaw);
+                mensagemFinal = `Vim pelo instagram do(a) ${nome} e queria saber mais sobre os produtos!`;
+            }
+
+            // Aplica nos botões
+            const wpp1Number = "5511989243359";
+            const wpp2Number = "5511993652030";
+
+            const wpp1 = document.getElementById("wpp1");
+            const wpp2 = document.getElementById("wpp2");
+
+            const href1 = `https://wa.me/${wpp1Number}?text=${encodeURIComponent(mensagemFinal)}`;
+            const href2 = `https://wa.me/${wpp2Number}?text=${encodeURIComponent(mensagemFinal)}`;
+
+            if (wpp1) wpp1.href = href1;
+            if (wpp2) wpp2.href = href2;
+
+            // Re-run das animações (seu efeito)
             document.querySelectorAll(".btn").forEach(btn => {
                 btn.classList.remove("rerun");
                 void btn.offsetHeight;
@@ -509,4 +546,3 @@
 </body>
 
 </html>
-
