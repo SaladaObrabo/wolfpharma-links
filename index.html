@@ -419,10 +419,328 @@
             .links>.btn:nth-child(4).rerun {
                 animation-delay: .45s;
             }
+
+            /* =========================================
+   AVISO NAVEGADOR DO TIKTOK
+========================================= */
+
+.tiktok-browser-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: rgba(8, 15, 35, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding: 105px 18px 30px;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, visibility .25s ease;
+}
+
+.tiktok-browser-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Card */
+
+.tiktok-browser-card {
+    position: relative;
+
+    width: 100%;
+    max-width: 410px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    padding: 28px 22px 22px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, .30),
+        0 0 0 1px rgba(255, 255, 255, .25);
+
+    animation: tiktokCardEnter .35s ease;
+}
+
+
+/* Ícone */
+
+.tiktok-browser-icon {
+    width: 64px;
+    height: 64px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        var(--blue-main),
+        var(--blue-dark)
+    );
+
+    color: #fff;
+
+    font-size: 30px;
+
+    box-shadow: 0 10px 25px rgba(26, 63, 206, .28);
+}
+
+
+/* Título */
+
+.tiktok-browser-title {
+    margin: 0 0 9px;
+
+    color: var(--blue-dark);
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* Texto */
+
+.tiktok-browser-text {
+    margin: 0;
+
+    color: var(--gray-dark);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* Destaque dos 3 pontinhos */
+
+.tiktok-browser-dots {
+    display: inline-flex;
+
+    margin: 14px 4px 8px;
+
+    padding: 7px 16px;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    background: var(--blue-soft);
+
+    color: var(--blue-dark);
+
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+
+/* Texto "Abrir no navegador" */
+
+.tiktok-browser-highlight {
+    color: var(--blue-dark);
+    font-weight: 700;
+}
+
+
+/* ==============================
+   SETA PARA O CANTO SUPERIOR
+============================== */
+
+.tiktok-arrow {
+    position: fixed;
+
+    top: 15px;
+    right: 16px;
+
+    width: 85px;
+    height: 85px;
+
+    z-index: 1000000;
+
+    pointer-events: none;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform-origin: center;
+
+    animation: tiktokArrowPulse 1.2s ease-in-out infinite;
+}
+
+.tiktok-browser-overlay.active + .tiktok-arrow {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Criando a seta */
+
+.tiktok-arrow::before {
+    content: "";
+
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    border-top: 5px solid #ffffff;
+    border-right: 5px solid #ffffff;
+
+    transform: rotate(-12deg);
+
+    top: 7px;
+    right: 7px;
+
+    border-radius: 3px;
+}
+
+
+/* pequeno brilho */
+
+.tiktok-arrow::after {
+    content: "";
+
+    position: absolute;
+
+    top: 3px;
+    right: 3px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.25);
+
+    box-shadow:
+        0 0 0 8px rgba(255,255,255,.10),
+        0 0 25px rgba(255,255,255,.55);
+}
+
+
+/* Botão fechar */
+
+.tiktok-browser-close {
+    width: 100%;
+
+    margin-top: 19px;
+
+    padding: 13px 18px;
+
+    border: 0;
+    border-radius: 14px;
+
+    background: #f2f4f8;
+
+    color: var(--gray-dark);
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* Entrada */
+
+@keyframes tiktokCardEnter {
+
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* Pulso seta */
+
+@keyframes tiktokArrowPulse {
+
+    0%,
+    100% {
+        transform: translate(-3px, 3px) scale(1);
+    }
+
+    50% {
+        transform: translate(3px, -3px) scale(1.08);
+    }
+
+}
+            
         </style>
     </head>
 
 <body>
+    <!-- Aviso navegador TikTok -->
+<div class="tiktok-browser-overlay" id="tiktokBrowserOverlay">
+
+    <div class="tiktok-browser-card">
+
+        <div class="tiktok-browser-icon">
+            ↗
+        </div>
+
+        <h2 class="tiktok-browser-title">
+            Você está no navegador do TikTok
+        </h2>
+
+        <p class="tiktok-browser-text">
+
+            Para acessar nossos links corretamente,
+            toque nos
+
+            <br>
+
+            <span class="tiktok-browser-dots">⋯</span>
+
+            <br>
+
+            no canto superior direito e escolha
+
+            <br>
+
+            <span class="tiktok-browser-highlight">
+                “Abrir no navegador”
+            </span>
+
+        </p>
+
+        <button
+            type="button"
+            class="tiktok-browser-close"
+            id="tiktokBrowserClose"
+        >
+            Entendi
+        </button>
+
+    </div>
+
+</div>
+
+<div class="tiktok-arrow" id="tiktokArrow"></div>
     <div class="wrap">
         <main class="card">
 
@@ -497,6 +815,60 @@
 
     <script>
         window.addEventListener("DOMContentLoaded", () => {
+            /* =========================================
+   DETECTA NAVEGADOR INTERNO DO TIKTOK
+========================================= */
+
+const userAgent =
+    navigator.userAgent ||
+    navigator.vendor ||
+    window.opera ||
+    "";
+
+const isTikTokBrowser =
+    /TikTok|musical_ly|BytedanceWebview|ByteLocale/i.test(userAgent);
+
+
+const tiktokOverlay =
+    document.getElementById("tiktokBrowserOverlay");
+
+const tiktokClose =
+    document.getElementById("tiktokBrowserClose");
+
+
+/*
+Só interfere nos botões se realmente
+estiver dentro do navegador do TikTok.
+*/
+
+if (isTikTokBrowser && tiktokOverlay) {
+
+    document.querySelectorAll(".links .btn").forEach(btn => {
+
+        btn.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            tiktokOverlay.classList.add("active");
+
+        });
+
+    });
+
+}
+
+
+/* Fechar pelo botão Entendi */
+
+if (tiktokClose) {
+
+    tiktokClose.addEventListener("click", function () {
+
+        tiktokOverlay.classList.remove("active");
+
+    });
+
+}
             const params = new URLSearchParams(window.location.search);
             const idRaw = (params.get("id") || "").trim();
             const msgRaw = (params.get("msg") || "").trim(); // opcional
